@@ -6,11 +6,13 @@ import SearchBar from './SearchBar';
 import GlobalApi from '../../Utils/GlobalApi';
 import { UserLocationContext } from '../../Context/UserLocationContext';
 import PlaceListView from './PlaceListView';
+import { SelectMarkerContext } from '../../Context/SelectMarkerContext';
 
 export default function HomeScreen() {
 
     const {location,setLocation}=useContext(UserLocationContext);
     const[placeList,setPlaceList] = useState([]);
+    const[selectedMarker, setSelectedMarker] = useState([]);
 
     useEffect(() => {
         location&&GetNearByPlace();
@@ -32,6 +34,7 @@ export default function HomeScreen() {
     }
 
     return (
+        <SelectMarkerContext.Provider value={{selectedMarker, setSelectedMarker}}>
         <View>
             <View style={styles.headerContainer}>
                 <Header/>
@@ -42,6 +45,7 @@ export default function HomeScreen() {
                 {placeList&&<PlaceListView placeList={placeList}/>}
             </View>
         </View>
+        </SelectMarkerContext.Provider>
     )
 }
 

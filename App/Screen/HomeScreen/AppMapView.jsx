@@ -21,7 +21,7 @@ export default function AppMapView({placeList}) {
               longitudeDelta: 0.0421
              }}
             >
-              {location? <Marker
+              <Marker
                 coordinate={{
                   latitude: location?.latitude,
                   longitude: location?.longitude
@@ -31,10 +31,11 @@ export default function AppMapView({placeList}) {
                 style={{height: 50, width: 50}}
                 />
 
-              </Marker>:null}
+              </Marker>
 
                 {placeList&&placeList.map((item,index)=>(
                   <Markers key={index}
+                  index={index}
                   place={item}
                   />
                 ))}

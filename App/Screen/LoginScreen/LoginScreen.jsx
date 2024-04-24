@@ -31,7 +31,7 @@ export default function LoginScreen() {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            marginTop: 20
+            marginTop: 'auto',
         }}>
             <Image source={require('./../../../assets/images/ph_logo.png')}
             style={styles.logoImage}
@@ -60,13 +60,13 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
   logoImage: {
     width: 200,
-    height: 80,
+    height: 200,
     objectFit: 'contain'
   },
   bgImage: {
     width: '100%',
-    height: 250,
-    marginTop:20,
+    height: 450,
+    marginTop:10,
     objectFit: 'cover'
   },
   heading:{
