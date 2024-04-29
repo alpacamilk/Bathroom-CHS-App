@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const BASE_URL = "https://places.googleapis.com/v1/places:searchText";
-const API_KEY="AIzaSyCgjOmPgkPijr32foY4oCLxjgnUzcHmWGo";
+const API_KEY = "AIzaSyCgjOmPgkPijr32foY4oCLxjgnUzcHmWGo";
 
 const config={
     headers:{
@@ -14,6 +14,7 @@ const config={
             'places.accessibilityOptions',
             'places.location',
             'places.shortFormattedAddress',
+            'places.id'
         ]
     }
 }

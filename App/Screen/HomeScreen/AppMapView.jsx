@@ -8,6 +8,7 @@ import Markers from './Markers';
 export default function AppMapView({placeList}) {
 
     const {location,setLocation} = useContext(UserLocationContext);
+
     return location?.latitude&&(
         <View>
             <MapView
