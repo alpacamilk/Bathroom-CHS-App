@@ -1,93 +1,101 @@
-import { View, Text, Image, StyleSheet } from 'react-native'
-import React from 'react'
-import Colors from './../../Utils/Colors'
+import { View, Text, Image, StyleSheet } from "react-native";
+import React from "react";
+import Colors from "./../../Utils/Colors";
 import * as WebBrowser from "expo-web-browser";
-import { useWarmUpBrowser } from '../../../hooks/useWarmUpBrowser';
-import { TouchableOpacity } from 'react-native';
-import { useOAuth } from '@clerk/clerk-expo';
+import { useWarmUpBrowser } from "../../../hooks/useWarmUpBrowser";
+import { TouchableOpacity } from "react-native";
+import { useOAuth } from "@clerk/clerk-expo";
 
 WebBrowser.maybeCompleteAuthSession();
 export default function LoginScreen() {
-    useWarmUpBrowser();
- 
+  useWarmUpBrowser();
+
   const { startOAuthFlow } = useOAuth({ strategy: "oauth_google" });
-  
-  const onPress=async()=>{
+
+  const onPress = async () => {
     try {
-        const { createdSessionId, signIn, signUp, setActive } =
-          await startOAuthFlow();
-   
-        if (createdSessionId) {
-          setActive({ session: createdSessionId });
-        } else {
-          // Use signIn or signUp for next steps such as MFA
-        }
-      } catch (err) {
-        console.error("OAuth error", err);
+      const { createdSessionId, signIn, signUp, setActive } =
+        await startOAuthFlow();
+
+      if (createdSessionId) {
+        setActive({ session: createdSessionId });
+      } else {
+        // Use signIn or signUp for next steps such as MFA
       }
-  }
-    return (
-        <View style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginTop: 'auto',
-        }}>
-            <Image source={require('./../../../assets/images/ph_logo.png')}
-            style={styles.logoImage}
-            />
-            <Image source={require('./../../../assets/images/public-toilet.png')} 
-            style={styles.bgImage}
-            />
-            <View style={{padding:20}}>
-                <Text style={styles.heading}>Your Ultimate Public Bathroom Finder App</Text>
-                <Text style={styles.desc}>Find a public bathroom near you</Text>
-                <TouchableOpacity style={styles.button}
-                onPress={onPress}
-                >
-                    <Text style={{
-                        color: Colors.WHITE,
-                        textAlign: 'center',
-                        fontFamily: 'Montserrat',
-                        fontSize:17
-                    }}>Login With Google</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
-    )
+    } catch (err) {
+      console.error("OAuth error", err);
+    }
+  };
+  return (
+    <View
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: "auto",
+      }}
+    >
+      <Image
+        source={require("./../../../assets/images/brand.png")}
+        style={styles.logoImage}
+      />
+      <Image
+        source={require("./../../../assets/images/pslogo.png")}
+        style={styles.bgImage}
+      />
+      <View style={{ padding: 20 }}>
+        <Text style={styles.heading}>
+          Your Ultimate Public Bathroom Finder App
+        </Text>
+        <Text style={styles.desc}>Find a public bathroom near you</Text>
+        <TouchableOpacity style={styles.button} onPress={onPress}>
+          <Text
+            style={{
+              color: Colors.WHITE,
+              textAlign: "center",
+              fontFamily: "Montserrat",
+              fontSize: 17,
+            }}
+          >
+            Login With Google
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
   logoImage: {
-    width: 200,
-    height: 200,
-    objectFit: 'contain'
+    width: 300,
+    height: 150,
+    objectFit: "contain",
   },
   bgImage: {
-    width: '100%',
+    width: "100%",
     height: 450,
-    marginTop:10,
-    objectFit: 'cover'
+    marginTop: 10,
+    objectFit: "cover",
   },
-  heading:{
+  heading: {
     fontSize: 25,
-    fontFamily: 'Montserrat-bold',
-    textAlign: 'center',
-    marginTop:20
+    fontFamily: "Montserrat-bold",
+    textAlign: "center",
+    marginTop: 20,
   },
-  desc:{
+  desc: {
     fontSize: 17,
-    fontFamily: 'Montserrat',
+    fontFamily: "Montserrat",
     marginTop: 15,
-    textAlign: 'center',
-    color: '#000',
-    color:Colors.GRAY 
+    textAlign: "center",
+    color: "#000",
+    color: Colors.GRAY,
   },
-  button:{
+  button: {
     backgroundColor: Colors.PRIMARY,
-    padding:16,
-    display: 'flex',
-    borderRadius:99,
-    marginTop:70
-  }
-})
+    padding: 16,
+    display: "flex",
+    borderRadius: 99,
+    marginTop: 70,
+  },
+});

@@ -34,16 +34,28 @@ export default function PlaceItem({ place, isFav, markedFav }) {
     await deleteDoc(doc(db, "bathroom-fav-place", placeId.toString()));
     Toast.show("Favorite Removed:(", Toast.TOP);
     markedFav();
-  }
+  };
 
-  const onDirectionClick=()=>{
-    const url=Platform.select({
-        ios: "maps:"+place.location.latitude+","+place?.location?.longitude+"?q="+place?.formattedAddress,
-        android: "geo:"+place.location.latitude+","+place?.location?.longitude+"?q="+place?.formattedAddress
+  const onDirectionClick = () => {
+    const url = Platform.select({
+      ios:
+        "maps:" +
+        place.location.latitude +
+        "," +
+        place?.location?.longitude +
+        "?q=" +
+        place?.formattedAddress,
+      android:
+        "geo:" +
+        place.location.latitude +
+        "," +
+        place?.location?.longitude +
+        "?q=" +
+        place?.formattedAddress,
     });
 
     Linking.openURL(url);
-  }
+  };
   return (
     <View
       style={{
@@ -150,7 +162,7 @@ export default function PlaceItem({ place, isFav, markedFav }) {
             </Text>
           </View>
           <Pressable
-          onPress={() =>onDirectionClick()}
+            onPress={() => onDirectionClick()}
             style={{
               padding: 12,
               backgroundColor: Colors.PRIMARY,

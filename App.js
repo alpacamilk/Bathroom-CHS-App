@@ -1,16 +1,15 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { useFonts } from 'expo-font';
-import { useCallback, useEffect, useState } from 'react';
-import * as SplashScreen from 'expo-splash-screen';
-import LoginScreen from './App/Screen/LoginScreen/LoginScreen';
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View } from "react-native";
+import { useFonts } from "expo-font";
+import { useCallback, useEffect, useState } from "react";
+import * as SplashScreen from "expo-splash-screen";
+import LoginScreen from "./App/Screen/LoginScreen/LoginScreen";
 import * as SecureStore from "expo-secure-store";
 import { ClerkProvider, SignedIn, SignedOut } from "@clerk/clerk-expo";
-import { NavigationContainer } from '@react-navigation/native';
-import TabNavigation from './App/Navigations/TabNavigation';
-import * as Location from 'expo-location';
-import { UserLocationContext } from './App/Context/UserLocationContext';
-
+import { NavigationContainer } from "@react-navigation/native";
+import TabNavigation from "./App/Navigations/TabNavigation";
+import * as Location from "expo-location";
+import { UserLocationContext } from "./App/Context/UserLocationContext";
 
 SplashScreen.preventAutoHideAsync();
 const tokenCache = {
@@ -36,10 +35,9 @@ export default function App() {
 
   useEffect(() => {
     (async () => {
-      
       let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== 'granted') {
-        setErrorMsg('Permission to access location was denied');
+      if (status !== "granted") {
+        setErrorMsg("Permission to access location was denied");
         return;
       }
 
@@ -48,7 +46,7 @@ export default function App() {
     })();
   }, []);
 
-  let text = 'Waiting..';
+  let text = "Waiting..";
   if (errorMsg) {
     text = errorMsg;
   } else if (location) {
@@ -56,9 +54,9 @@ export default function App() {
   }
 
   const [fontsLoaded, fontError] = useFonts({
-    'Montserrat': require('./assets/fonts/Montserrat-Regular.ttf'),
-    'Montserrat-bold': require('./assets/fonts/Montserrat-Bold.ttf'),
-    'Montserrat-medium': require('./assets/fonts/Montserrat-SemiBold.ttf'),
+    Montserrat: require("./assets/fonts/Montserrat-Regular.ttf"),
+    "Montserrat-bold": require("./assets/fonts/Montserrat-Bold.ttf"),
+    "Montserrat-medium": require("./assets/fonts/Montserrat-SemiBold.ttf"),
   });
 
   const onLayoutRootView = useCallback(async () => {
@@ -72,24 +70,26 @@ export default function App() {
   }
 
   return (
-    <ClerkProvider 
-    tokenCache={tokenCache}
-    publishableKey={'pk_test_aGFybWxlc3MtcGVuZ3Vpbi05MS5jbGVyay5hY2NvdW50cy5kZXYk'}>
-      <UserLocationContext.Provider
-       value={{location, setLocation}}>
-    <View style={styles.container} onLayout={onLayoutRootView}>
-      <SignedIn>
-        <NavigationContainer>
-          <TabNavigation/>
-        </NavigationContainer>
-      </SignedIn>
-      <SignedOut>
-        <LoginScreen/>
-      </SignedOut>
+    <ClerkProvider
+      tokenCache={tokenCache}
+      publishableKey={
+        "pk_test_aGFybWxlc3MtcGVuZ3Vpbi05MS5jbGVyay5hY2NvdW50cy5kZXYk"
+      }
+    >
+      <UserLocationContext.Provider value={{ location, setLocation }}>
+        <View style={styles.container} onLayout={onLayoutRootView}>
+          <SignedIn>
+            <NavigationContainer>
+              <TabNavigation />
+            </NavigationContainer>
+          </SignedIn>
+          <SignedOut>
+            <LoginScreen />
+          </SignedOut>
 
-      <StatusBar style="auto" />
-    </View>
-    </UserLocationContext.Provider>
+          <StatusBar style="auto" />
+        </View>
+      </UserLocationContext.Provider>
     </ClerkProvider>
   );
 }
@@ -97,7 +97,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     paddingTop: 0,
   },
 });
